@@ -113,6 +113,9 @@ public class FachadaBaseDatos {
     public Usuario validarUsuario(String idUsuario, String clave){
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
+    public boolean insertarUsuario(Usuario usuario){
+        return daoUsuarios.insertarUsuario(usuario);
+    }
    
     public java.util.List<Categoria> consultarCategorias(){
         return daoCategorias.consultarCategorias();

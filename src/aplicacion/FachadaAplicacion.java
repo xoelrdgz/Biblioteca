@@ -71,6 +71,10 @@ public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.
 public Boolean comprobarAutentificacion(String idUsuario, String clave){
   return cu.comprobarAutentificacion(idUsuario, clave);
 }
+
+public boolean insertarUsuario(Usuario usuario) {
+        return cu.insertarUsuario(usuario);
+}
  
 
 

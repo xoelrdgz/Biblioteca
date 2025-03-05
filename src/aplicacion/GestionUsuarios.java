@@ -31,6 +31,9 @@ public class GestionUsuarios {
       } else return false;
   }
   
- 
+  public boolean insertarUsuario(Usuario usuario){
+      //TODO: añadir validacion
+      return fbd.insertarUsuario(usuario);
+  }
   
 }

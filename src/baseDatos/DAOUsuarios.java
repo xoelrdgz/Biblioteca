@@ -48,6 +48,40 @@ public class DAOUsuarios extends AbstractDAO {
         }
         return resultado;
     }
-
-   
+    
+    public boolean insertarUsuario(Usuario usuario){
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        boolean resultado = false;
+        
+        con = this.getConexion();
+        
+        try{
+            stmUsuario = con.prepareStatement(
+                "INSERT INTO usuario (id_usuario, clave, nombre, direccion, email, tipo_usuario) " +
+                "VALUES (?, ?, ?, ?, ?, ?)");
+            
+            stmUsuario.setString(1, usuario.getIdUsuario());
+            stmUsuario.setString(2, usuario.getClave());
+            stmUsuario.setString(3, usuario.getNombre());
+            stmUsuario.setString(4, usuario.getDireccion());
+            stmUsuario.setString(5, usuario.getEmail());
+            stmUsuario.setString(6, usuario.getTipoUsuario().name());
+            
+            int filasAfectadas = stmUsuario.executeUpdate();
+            resultado = filasAfectadas > 0;
+            
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally{
+            try{
+                if (stmUsuario != null) stmUsuario.close();
+            } catch (SQLException e){
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
 }
