@@ -73,11 +73,22 @@ public Boolean comprobarAutentificacion(String idUsuario, String clave){
 }
 
 public boolean insertarUsuario(Usuario usuario) {
-        return cu.insertarUsuario(usuario);
+    return cu.insertarUsuario(usuario);
 }
- 
 
+public boolean modificarUsuario(Usuario usuario) {
+    return cu.modificarUsuario(usuario);
+}
 
+public boolean borrarUsuario(String idUsuario) {
+    return cu.borrarUsuario(idUsuario);
+}
 
+public java.util.List<Usuario> buscarUsuarios(String id, String nombre) {
+    return cu.buscarUsuarios(id, nombre);
+}
 
+public void gestionarUsuarios() {
+    fgui.gestionarUsuarios();
+}
 }

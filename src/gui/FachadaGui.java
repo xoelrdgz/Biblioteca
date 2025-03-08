@@ -57,6 +57,11 @@ public class FachadaGui {
        va.setVisible(true);
     }
 
-    
+    public void gestionarUsuarios() {
+       VUsuarios vu;
+       
+       vu = new VUsuarios(vp, true, fa);
+       vu.setVisible(true);
+    }
    
 }

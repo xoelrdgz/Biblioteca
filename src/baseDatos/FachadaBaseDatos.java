@@ -113,8 +113,21 @@ public class FachadaBaseDatos {
     public Usuario validarUsuario(String idUsuario, String clave){
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
+    
     public boolean insertarUsuario(Usuario usuario){
         return daoUsuarios.insertarUsuario(usuario);
+    }
+    
+    public java.util.List<Usuario> buscarUsuarios(String id, String nombre){
+        return daoUsuarios.buscarUsuarios(id, nombre);
+    }
+   
+    public boolean modificarUsuario(Usuario usuario) {
+        return daoUsuarios.modificarUsuario(usuario);
+    }
+    
+    public boolean borrarUsuario(String idUsuario) {
+        return daoUsuarios.borrarUsuario(idUsuario);
     }
    
     public java.util.List<Categoria> consultarCategorias(){

@@ -4,6 +4,13 @@
  */
 package gui;
 
+import aplicacion.TipoUsuario;
+import aplicacion.Usuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 /**
  *
  * @author xoel
@@ -11,13 +18,37 @@ package gui;
 public class VUsuarios extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VUsuarios.class.getName());
+    private aplicacion.FachadaAplicacion fa;
+    private boolean modoEdicion = false;
+    private String idUsuarioOriginal = null;
 
     /**
      * Creates new form VUsuarios
      */
-    public VUsuarios(java.awt.Frame parent, boolean modal) {
+    public VUsuarios(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
+        this.fa = fa;
         initComponents();
+        
+        // Configurar modelo de tabla
+        jTable1.setModel(new ModeloTablaUsuarios());
+        
+        // Añadir evento de selección de tabla
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting() && jTable1.getSelectedRow() != -1) {
+                    // Cargar datos del usuario seleccionado
+                    cargarUsuarioSeleccionado();
+                }
+            }
+        });
+        
+        // Cargar usuarios al iniciar
+        buscarUsuarios();
+        
+        // Configurar botones
+        actualizarEstadoBotones();
     }
 
     /**
@@ -38,10 +69,31 @@ public class VUsuarios extends javax.swing.JDialog {
         jTextPane2 = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextPane5 = new javax.swing.JTextPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextPane6 = new javax.swing.JTextPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextPane7 = new javax.swing.JTextPane();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPane4 = new javax.swing.JTextPane();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextPane8 = new javax.swing.JTextPane();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestion de usuarios");
-        setPreferredSize(new java.awt.Dimension(496, 419));
         setResizable(false);
 
         jLabel1.setText("ID:");
@@ -69,6 +121,58 @@ public class VUsuarios extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTable1);
 
+        jButton2.setText("Nuevo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Borrar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("ID:");
+
+        jLabel5.setText("Nombre:");
+
+        jLabel4.setText("Clave:");
+
+        jLabel6.setText("Email:");
+
+        jLabel7.setText("Tipo:");
+
+        jLabel8.setText("Direc.:");
+
+        jScrollPane4.setViewportView(jTextPane3);
+
+        jScrollPane5.setViewportView(jTextPane5);
+
+        jScrollPane6.setViewportView(jTextPane6);
+
+        jScrollPane7.setViewportView(jTextPane7);
+
+        jScrollPane8.setViewportView(jTextPane4);
+
+        jScrollPane9.setViewportView(jTextPane8);
+
+        jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,45 +180,325 @@ public class VUsuarios extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton5))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jButton1))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4))
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel8))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Buscar usuarios
+        buscarUsuarios();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Limpiar los campos para un nuevo usuario
+        jTextPane3.setText(""); // ID
+        jTextPane7.setText(""); // Clave
+        jTextPane6.setText(""); // Nombre
+        jTextPane5.setText(""); // Email
+        jTextPane8.setText(""); // Dirección
+        jTextPane4.setText("Normal"); // Tipo por defecto
+        
+        // Salir del modo edición
+        modoEdicion = false;
+        idUsuarioOriginal = null;
+        
+        // Actualizar estado de botones
+        actualizarEstadoBotones();
+        
+        // Quitar selección de la tabla
+        jTable1.clearSelection();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Guardar usuario (nuevo o actualización)
+        String id = jTextPane3.getText().trim();
+        String clave = jTextPane7.getText().trim();
+        String nombre = jTextPane6.getText().trim();
+        String email = jTextPane5.getText().trim();
+        String direccion = jTextPane8.getText().trim();
+        String tipo = jTextPane4.getText().trim();
+        
+        // Validaciones básicas
+        if (id.isEmpty() || clave.isEmpty() || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                    "Los campos ID, Clave y Nombre son obligatorios", 
+                    "Error de validación", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Crear objeto usuario
+        TipoUsuario tipoUsuario;
+        try {
+            tipoUsuario = TipoUsuario.valueOf(tipo);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, 
+                    "El tipo de usuario debe ser 'Normal' o 'Administrador'", 
+                    "Error de validación", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Usuario usuario = new Usuario(id, clave, nombre, direccion, email, tipoUsuario);
+        
+        boolean exito;
+        if (modoEdicion) {
+            // Modo edición - actualizar usuario existente
+            exito = fa.modificarUsuario(usuario);
+            
+            if (exito) {
+                JOptionPane.showMessageDialog(this, 
+                        "Usuario actualizado correctamente", 
+                        "Éxito", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                // Salir del modo edición
+                modoEdicion = false;
+                idUsuarioOriginal = null;
+                
+                // Actualizar tabla de usuarios
+                buscarUsuarios();
+                
+                // Actualizar estado de botones
+                actualizarEstadoBotones();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                        "Error al actualizar el usuario", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Modo inserción - crear nuevo usuario
+            exito = fa.insertarUsuario(usuario);
+            
+            if (exito) {
+                JOptionPane.showMessageDialog(this, 
+                        "Usuario creado correctamente", 
+                        "Éxito", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                // Limpiar formulario
+                jButton2ActionPerformed(evt);
+                
+                // Actualizar tabla de usuarios
+                buscarUsuarios();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                        "Error al crear el usuario. Compruebe que el ID no esté duplicado.", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // Cerrar ventana
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // Borrar usuario seleccionado
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            ModeloTablaUsuarios modelo = (ModeloTablaUsuarios) jTable1.getModel();
+            Usuario usuarioSeleccionado = modelo.obtenerUsuario(filaSeleccionada);
+            
+            if (usuarioSeleccionado != null) {
+                // Pedir confirmación antes de borrar
+                int confirmacion = JOptionPane.showConfirmDialog(
+                        this,
+                        "¿Está seguro de que desea eliminar al usuario " + 
+                        usuarioSeleccionado.getNombre() + " (" + usuarioSeleccionado.getIdUsuario() + ")?",
+                        "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+                
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    // Proceder con la eliminación
+                    boolean exito = fa.borrarUsuario(usuarioSeleccionado.getIdUsuario());
+                    
+                    if (exito) {
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "Usuario eliminado correctamente",
+                                "Éxito",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        
+                        // Limpiar formulario
+                        jButton2ActionPerformed(evt);
+                        
+                        // Actualizar tabla de usuarios
+                        buscarUsuarios();
+                    }
+                    // No necesitamos mostrar un mensaje de error aquí porque
+                    // el método borrarUsuario en GestionUsuarios ya muestra un mensaje
+                    // si hay un problema con la eliminación
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe seleccionar un usuario para borrar",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+    
+    private void buscarUsuarios() {
+        // Obtener criterios de búsqueda
+        String id = jTextPane1.getText().trim();
+        String nombre = jTextPane2.getText().trim();
+        
+        // Realizar búsqueda
+        List<Usuario> usuarios = fa.buscarUsuarios(id, nombre);
+        
+        // Actualizar tabla
+        ModeloTablaUsuarios modelo = (ModeloTablaUsuarios) jTable1.getModel();
+        modelo.setFilas(usuarios);
+        
+        // Habilitar botón de borrar si hay resultados
+        jButton4.setEnabled(!usuarios.isEmpty());
+    }
+    
+    private void cargarUsuarioSeleccionado() {
+        int filaSeleccionada = jTable1.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            ModeloTablaUsuarios modelo = (ModeloTablaUsuarios) jTable1.getModel();
+            Usuario usuarioSeleccionado = modelo.obtenerUsuario(filaSeleccionada);
+            
+            if (usuarioSeleccionado != null) {
+                // Guardar ID original para la actualización
+                idUsuarioOriginal = usuarioSeleccionado.getIdUsuario();
+                
+                // Cargar datos en los campos de edición
+                jTextPane3.setText(usuarioSeleccionado.getIdUsuario());
+                jTextPane7.setText(usuarioSeleccionado.getClave());
+                jTextPane6.setText(usuarioSeleccionado.getNombre());
+                jTextPane5.setText(usuarioSeleccionado.getEmail());
+                jTextPane8.setText(usuarioSeleccionado.getDireccion());
+                jTextPane4.setText(usuarioSeleccionado.getTipoUsuario().name());
+                
+                // Entrar en modo edición
+                modoEdicion = true;
+                
+                // Actualizar estado de botones
+                actualizarEstadoBotones();
+            }
+        }
+    }
+    
+    private void actualizarEstadoBotones() {
+        // Actualizar texto del botón según modo
+        if (modoEdicion) {
+            jButton3.setText("Actualizar");
+        } else {
+            jButton3.setText("Guardar");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -141,7 +525,7 @@ public class VUsuarios extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                VUsuarios dialog = new VUsuarios(new javax.swing.JFrame(), true);
+                VUsuarios dialog = new VUsuarios(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -155,13 +539,35 @@ public class VUsuarios extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
+    private javax.swing.JTextPane jTextPane4;
+    private javax.swing.JTextPane jTextPane5;
+    private javax.swing.JTextPane jTextPane6;
+    private javax.swing.JTextPane jTextPane7;
+    private javax.swing.JTextPane jTextPane8;
     // End of variables declaration//GEN-END:variables
 }

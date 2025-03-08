@@ -230,8 +230,8 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoLibroActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        
+        // Abrir ventana de gestión de usuarios
+        fa.gestionarUsuarios();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
