@@ -15,6 +15,7 @@ public class FachadaAplicacion {
     baseDatos.FachadaBaseDatos fbd;
     GesionLibros cl;
     GestionUsuarios cu;
+    GestionCategorias cc;
     
     
  public FachadaAplicacion(){
@@ -22,6 +23,7 @@ public class FachadaAplicacion {
    fbd= new baseDatos.FachadaBaseDatos(this);
    cl= new GesionLibros(fgui, fbd);
    cu= new GestionUsuarios(fgui, fbd);
+   cc= new GestionCategorias(fgui, fbd);
  }
 
  public static void main(String args[]) {
@@ -90,5 +92,21 @@ public java.util.List<Usuario> buscarUsuarios(String id, String nombre) {
 
 public void gestionarUsuarios() {
     fgui.gestionarUsuarios();
+}
+
+public java.util.List<Categoria> getCategorias() {
+    return fbd.consultarCategorias();
+}
+
+public boolean insertarCategoria(Categoria categoria) {
+    return cc.insertarCategoria(categoria);
+}
+
+public boolean borrarCategoria(String nombreCategoria) {
+    return cc.borrarCategoria(nombreCategoria);
+}
+
+public void gestionarCategorias() {
+    fgui.gestionarCategorias();
 }
 }

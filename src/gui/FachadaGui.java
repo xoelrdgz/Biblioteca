@@ -63,5 +63,12 @@ public class FachadaGui {
        vu = new VUsuarios(vp, true, fa);
        vu.setVisible(true);
     }
+    
+    public void gestionarCategorias() {
+       VCategorias vc;
+       
+       vc = new VCategorias(vp, true, fa);
+       vc.setVisible(true);
+    }
    
 }

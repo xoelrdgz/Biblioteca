@@ -133,5 +133,13 @@ public class FachadaBaseDatos {
     public java.util.List<Categoria> consultarCategorias(){
         return daoCategorias.consultarCategorias();
     }
+    
+    public boolean insertarCategoria(Categoria categoria){
+        return daoCategorias.insertarCategoria(categoria);
+    }
+    
+    public boolean borrarCategoria(String nombreCategoria){
+        return daoCategorias.borrarCategoria(nombreCategoria);
+    }
 
 }
