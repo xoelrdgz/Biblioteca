@@ -47,6 +47,34 @@ public class VLibro extends javax.swing.JDialog {
         
         btnIzquierda.setEnabled(false);
         btnBorrarEjemplar.setEnabled(false);
+        btnPrestamo.setEnabled(false);
+        btnDevolver.setEnabled(false);
+        
+        // Añadir ActionListener para btnPrestamo
+        btnPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrestamoActionPerformed(evt);
+            }
+        });
+        
+        // Añadir ActionListener para btnDevolver
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverActionPerformed(evt);
+            }
+        });
+        
+        // Inicializar tabla de ejemplares con modelo que muestra información de préstamos
+        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares(fa);
+        tablaEjemplares.setModel(mTEjemplares);
+        
+        // Añadir ListSelectionListener para tablaEjemplares
+        tablaEjemplares.getSelectionModel().addListSelectionListener(e -> {
+            boolean filaSeleccionada = tablaEjemplares.getSelectedRow() != -1;
+            btnBorrarEjemplar.setEnabled(filaSeleccionada);
+            btnPrestamo.setEnabled(filaSeleccionada);
+            btnDevolver.setEnabled(filaSeleccionada);
+        });
     }
 
     public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Libro libro, java.util.List<String> categorias, java.util.List<String> restoCategorias) {
@@ -86,15 +114,59 @@ public class VLibro extends javax.swing.JDialog {
             btnIzquierda.setEnabled(true);
         } else btnIzquierda.setEnabled(false);
 
-        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares();
+        // Inicializar tabla de ejemplares con modelo que muestra información de préstamos
+        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares(fa);
         tablaEjemplares.setModel(mTEjemplares);
         mTEjemplares.setFilas(libro.getEjemplares());
+        
         if (mTEjemplares.getRowCount()>0) {
             tablaEjemplares.setRowSelectionInterval(0, 0);
             btnBorrarEjemplar.setEnabled(true);
-        } else btnBorrarEjemplar.setEnabled(false);
+            btnPrestamo.setEnabled(true);
+            btnDevolver.setEnabled(true);
+        } else {
+            btnBorrarEjemplar.setEnabled(false);
+            btnPrestamo.setEnabled(false);
+            btnDevolver.setEnabled(false);
+        }
         
         this.ejemplaresBorrados = new java.util.ArrayList<Integer>();
+        
+        // Añadir ActionListener para btnPrestamo
+        btnPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrestamoActionPerformed(evt);
+            }
+        });
+        
+        // Añadir ActionListener para btnDevolver
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverActionPerformed(evt);
+            }
+        });
+        
+        // Añadir ListSelectionListener para tablaEjemplares
+        tablaEjemplares.getSelectionModel().addListSelectionListener(e -> {
+            boolean filaSeleccionada = tablaEjemplares.getSelectedRow() != -1;
+            btnBorrarEjemplar.setEnabled(filaSeleccionada);
+            
+            // Habilitar/deshabilitar los botones de préstamo y devolución según el estado del ejemplar
+            if (filaSeleccionada) {
+                Ejemplar ejemplar = mTEjemplares.obtenerEjemplar(tablaEjemplares.getSelectedRow());
+                if (ejemplar.getNumEjemplar() != null && ejemplar.getLibro() != null) {
+                    boolean prestado = fa.ejemplarPrestado(idLibro, ejemplar.getNumEjemplar());
+                    btnPrestamo.setEnabled(!prestado);  // Solo permitir prestar si no está prestado
+                    btnDevolver.setEnabled(prestado);   // Solo permitir devolver si está prestado
+                } else {
+                    btnPrestamo.setEnabled(false);
+                    btnDevolver.setEnabled(false);
+                }
+            } else {
+                btnPrestamo.setEnabled(false);
+                btnDevolver.setEnabled(false);
+            }
+        });
     }
 
     /** This method is called from within the constructor to
@@ -143,6 +215,8 @@ public class VLibro extends javax.swing.JDialog {
         btnBorrarEjemplar = new javax.swing.JButton();
         btnNuevoEjemplar = new javax.swing.JButton();
         btnActualizarEjemplaresLibro = new javax.swing.JButton();
+        btnPrestamo = new javax.swing.JButton();
+        btnDevolver = new javax.swing.JButton();
         btnBorrarLibro = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -202,7 +276,7 @@ public class VLibro extends javax.swing.JDialog {
                     .addGroup(panelGeneralAutoresLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+                        .addComponent(textoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
                     .addGroup(panelGeneralAutoresLayout.createSequentialGroup()
                         .addGroup(panelGeneralAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGeneralAutoresLayout.createSequentialGroup()
@@ -221,12 +295,12 @@ public class VLibro extends javax.swing.JDialog {
                                 .addComponent(textoAno)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelGeneralAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(textoEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                             .addGroup(panelGeneralAutoresLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textoId, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 91, Short.MAX_VALUE))))
+                                .addGap(0, 126, Short.MAX_VALUE))))
                     .addComponent(jLabel7)
                     .addGroup(panelGeneralAutoresLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,7 +310,7 @@ public class VLibro extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGeneralAutoresLayout.createSequentialGroup()
                                 .addComponent(btnNuevoAutor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textoNuevoAutor, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                                .addComponent(textoNuevoAutor, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
                             .addComponent(btnActualizarLibro))))
                 .addContainerGap())
         );
@@ -321,7 +395,7 @@ public class VLibro extends javax.swing.JDialog {
                         .addComponent(jLabel8))
                     .addGroup(panelCategoriasLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCategoriasLayout.createSequentialGroup()
@@ -335,7 +409,7 @@ public class VLibro extends javax.swing.JDialog {
                         .addComponent(jLabel9)
                         .addGap(65, 65, 65))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCategoriasLayout.createSequentialGroup()
-                .addContainerGap(383, Short.MAX_VALUE)
+                .addContainerGap(387, Short.MAX_VALUE)
                 .addComponent(btnActualizarCategoriasLibro)
                 .addContainerGap())
         );
@@ -388,29 +462,49 @@ public class VLibro extends javax.swing.JDialog {
             }
         });
 
+        btnPrestamo.setText("Prestamo");
+        btnPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrestamoActionPerformed(evt);
+            }
+        });
+
+        btnDevolver.setText("Devolver");
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelEjemplaresLayout = new javax.swing.GroupLayout(panelEjemplares);
         panelEjemplares.setLayout(panelEjemplaresLayout);
         panelEjemplaresLayout.setHorizontalGroup(
             panelEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
             .addGroup(panelEjemplaresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnNuevoEjemplar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorrarEjemplar)
+                .addGap(18, 18, 18)
+                .addComponent(btnPrestamo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDevolver)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizarEjemplaresLibro)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
         panelEjemplaresLayout.setVerticalGroup(
             panelEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEjemplaresLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelEjemplaresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevoEjemplar)
                     .addComponent(btnBorrarEjemplar)
-                    .addComponent(btnActualizarEjemplaresLibro))
+                    .addComponent(btnActualizarEjemplaresLibro)
+                    .addComponent(btnPrestamo)
+                    .addComponent(btnDevolver))
                 .addGap(24, 24, 24))
         );
 
@@ -533,13 +627,30 @@ public class VLibro extends javax.swing.JDialog {
 
     private void btnBorrarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarEjemplarActionPerformed
         // TODO add your handling code here:
-     ModeloTablaEjemplares me;
-     me=(ModeloTablaEjemplares) tablaEjemplares.getModel();
-     if (me.obtenerEjemplar(tablaEjemplares.getSelectedRow()).getNumEjemplar()!=null)
-         ejemplaresBorrados.add(me.obtenerEjemplar(tablaEjemplares.getSelectedRow()).getNumEjemplar());
-     me.borrarEjemplar(tablaEjemplares.getSelectedRow());
-     if (me.getRowCount()==0) btnBorrarEjemplar.setEnabled(false);
-     else tablaEjemplares.setRowSelectionInterval(0, 0);
+        ModeloTablaEjemplares me;
+        me = (ModeloTablaEjemplares) tablaEjemplares.getModel();
+        int filaSeleccionada = tablaEjemplares.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+            Ejemplar ejemplar = me.obtenerEjemplar(filaSeleccionada);
+            if (ejemplar.getNumEjemplar() != null) {
+                // Verificar si el ejemplar tiene préstamos asociados (actuales o históricos)
+                if (fa.ejemplarTienePrestamos(idLibro, ejemplar.getNumEjemplar())) {
+                    fa.muestraExcepcion("No se puede borrar el ejemplar porque tiene préstamos asociados.");
+                    return;
+                }
+                ejemplaresBorrados.add(ejemplar.getNumEjemplar());
+            }
+            
+            me.borrarEjemplar(filaSeleccionada);
+            if (me.getRowCount() == 0) {
+                btnBorrarEjemplar.setEnabled(false);
+                btnPrestamo.setEnabled(false);
+                btnDevolver.setEnabled(false);
+            } else {
+                tablaEjemplares.setRowSelectionInterval(0, 0);
+            }
+        }
     }//GEN-LAST:event_btnBorrarEjemplarActionPerformed
 
     private void btnBorrarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarLibroActionPerformed
@@ -581,6 +692,78 @@ public class VLibro extends javax.swing.JDialog {
         } else btnBorrarEjemplar.setEnabled(false);
     }//GEN-LAST:event_btnActualizarEjemplaresLibroActionPerformed
 
+    private void btnPrestamoActionPerformed(java.awt.event.ActionEvent evt) {
+        ModeloTablaEjemplares me = (ModeloTablaEjemplares) tablaEjemplares.getModel();
+        int filaSeleccionada = tablaEjemplares.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+            Ejemplar ejemplar = me.obtenerEjemplar(filaSeleccionada);
+            
+            // Comprobar si el ejemplar ya está prestado
+            if (fa.ejemplarPrestado(idLibro, ejemplar.getNumEjemplar())) {
+                fa.muestraExcepcion("Este ejemplar ya está prestado. No se puede realizar un nuevo préstamo.");
+                return;
+            }
+            
+            // Mostrar la ventana de préstamos
+            fa.mostrarVentanaPrestamos(idLibro, ejemplar.getNumEjemplar());
+            
+            // Actualizar la tabla de ejemplares después del posible préstamo
+            if (idLibro != null) {
+                Libro libro = fa.consultarLibro(idLibro);
+                if (libro != null) {
+                    me.setFilas(libro.getEjemplares());
+                    tablaEjemplares.repaint();
+                    
+                    // Actualizar estado de botones
+                    if (tablaEjemplares.getSelectedRow() != -1) {
+                        ejemplar = me.obtenerEjemplar(tablaEjemplares.getSelectedRow());
+                        boolean prestado = fa.ejemplarPrestado(idLibro, ejemplar.getNumEjemplar());
+                        btnPrestamo.setEnabled(!prestado);
+                        btnDevolver.setEnabled(prestado);
+                    }
+                }
+            }
+        }
+    }
+    
+    private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {
+        ModeloTablaEjemplares me = (ModeloTablaEjemplares) tablaEjemplares.getModel();
+        int filaSeleccionada = tablaEjemplares.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+            Ejemplar ejemplar = me.obtenerEjemplar(filaSeleccionada);
+            
+            // Comprobar si el ejemplar está prestado
+            if (!fa.ejemplarPrestado(idLibro, ejemplar.getNumEjemplar())) {
+                fa.muestraExcepcion("Este ejemplar no está prestado. No se puede realizar una devolución.");
+                return;
+            }
+            
+            // Realizar la devolución
+            if (fa.devolverEjemplar(idLibro, ejemplar.getNumEjemplar())) {
+                fa.muestraExcepcion("Ejemplar devuelto con éxito.");
+                
+                // Actualizar la tabla de ejemplares después de la devolución
+                if (idLibro != null) {
+                    Libro libro = fa.consultarLibro(idLibro);
+                    if (libro != null) {
+                        me.setFilas(libro.getEjemplares());
+                        tablaEjemplares.repaint();
+                        
+                        // Actualizar estado de botones
+                        if (tablaEjemplares.getSelectedRow() != -1) {
+                            ejemplar = me.obtenerEjemplar(tablaEjemplares.getSelectedRow());
+                            boolean prestado = fa.ejemplarPrestado(idLibro, ejemplar.getNumEjemplar());
+                            btnPrestamo.setEnabled(!prestado);
+                            btnDevolver.setEnabled(prestado);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -593,9 +776,11 @@ public class VLibro extends javax.swing.JDialog {
     private javax.swing.JButton btnBorrarEjemplar;
     private javax.swing.JButton btnBorrarLibro;
     private javax.swing.JButton btnDerecha;
+    private javax.swing.JButton btnDevolver;
     private javax.swing.JButton btnIzquierda;
     private javax.swing.JButton btnNuevoAutor;
     private javax.swing.JButton btnNuevoEjemplar;
+    private javax.swing.JButton btnPrestamo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

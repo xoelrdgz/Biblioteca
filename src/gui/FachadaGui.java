@@ -70,5 +70,12 @@ public class FachadaGui {
        vc = new VCategorias(vp, true, fa);
        vc.setVisible(true);
     }
+    
+    public void mostrarVentanaPrestamos(Integer idLibro, Integer numEjemplar) {
+       VPrestamos vp;
+       
+       vp = new VPrestamos(this.vp, true, fa, idLibro, numEjemplar);
+       vp.setVisible(true);
+    }
    
 }

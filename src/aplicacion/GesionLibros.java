@@ -73,6 +73,17 @@ public class GesionLibros{
        
        fbd.borrarEjemplaresLibro(idLibro, borrar);
 
-       return fbd.consultarEjemplaresLibro(idLibro);
+       // Obtener los ejemplares actualizados de la base de datos
+       java.util.List<Ejemplar> ejemplaresActualizados = fbd.consultarEjemplaresLibro(idLibro);
+       
+       // Obtener el objeto libro completo
+       Libro libro = fbd.consultarLibro(idLibro);
+       
+       // Asignar el libro a cada ejemplar para que ModeloTablaEjemplares pueda mostrar el estado correcto
+       for (Ejemplar e : ejemplaresActualizados) {
+           e.setLibro(libro);
+       }
+       
+       return ejemplaresActualizados;
     }
 }

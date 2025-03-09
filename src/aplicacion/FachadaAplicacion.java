@@ -16,6 +16,7 @@ public class FachadaAplicacion {
     GesionLibros cl;
     GestionUsuarios cu;
     GestionCategorias cc;
+    GestionPrestamos cp;
     
     
  public FachadaAplicacion(){
@@ -24,6 +25,7 @@ public class FachadaAplicacion {
    cl= new GesionLibros(fgui, fbd);
    cu= new GestionUsuarios(fgui, fbd);
    cc= new GestionCategorias(fgui, fbd);
+   cp= new GestionPrestamos(fgui, fbd);
  }
 
  public static void main(String args[]) {
@@ -108,5 +110,41 @@ public boolean borrarCategoria(String nombreCategoria) {
 
 public void gestionarCategorias() {
     fgui.gestionarCategorias();
+}
+
+public int numPrestamosVencidos(String idUsuario) {
+    return cp.numPrestamosVencidos(idUsuario);
+}
+
+public boolean prestarEjemplar(String idUsuario, Integer idLibro, Integer numEjemplar) {
+    return cp.prestarEjemplar(idUsuario, idLibro, numEjemplar);
+}
+
+public boolean devolverEjemplar(Integer idLibro, Integer numEjemplar) {
+    return cp.devolverEjemplar(idLibro, numEjemplar);
+}
+
+public void mostrarVentanaPrestamos(Integer idLibro, Integer numEjemplar) {
+    cp.mostrarVentanaPrestamos(idLibro, numEjemplar);
+}
+
+public java.util.List<Usuario> buscarUsuariosPrestamo(String id, String nombre) {
+    return cp.buscarUsuariosPrestamo(id, nombre);
+}
+
+public boolean ejemplarPrestado(Integer idLibro, Integer numEjemplar) {
+    return fbd.ejemplarPrestado(idLibro, numEjemplar);
+}
+
+public java.util.Map<String, Object> obtenerInfoPrestamo(Integer idLibro, Integer numEjemplar) {
+    return fbd.obtenerInfoPrestamo(idLibro, numEjemplar);
+}
+
+public Libro consultarLibro(Integer idLibro) {
+    return fbd.consultarLibro(idLibro);
+}
+
+public boolean ejemplarTienePrestamos(Integer idLibro, Integer numEjemplar) {
+    return cp.ejemplarTienePrestamos(idLibro, numEjemplar);
 }
 }

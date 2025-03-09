@@ -26,6 +26,7 @@ public class FachadaBaseDatos {
     private DAOLibros daoLibros;
     private DAOCategorias daoCategorias;
     private DAOUsuarios daoUsuarios;
+    private DAOPrestamos daoPrestamos;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -54,6 +55,7 @@ public class FachadaBaseDatos {
             daoLibros = new DAOLibros(conexion, fa);
             daoCategorias = new DAOCategorias(conexion, fa);
             daoUsuarios = new DAOUsuarios(conexion, fa);
+            daoPrestamos = new DAOPrestamos(conexion, fa);
           
 
 
@@ -140,6 +142,35 @@ public class FachadaBaseDatos {
     
     public boolean borrarCategoria(String nombreCategoria){
         return daoCategorias.borrarCategoria(nombreCategoria);
+    }
+    
+    // Métodos de préstamos
+    public int numPrestamosVencidos(String idUsuario) {
+        return daoPrestamos.numPrestamosVencidos(idUsuario);
+    }
+    
+    public boolean prestarEjemplar(String idUsuario, Integer idLibro, Integer numEjemplar) {
+        return daoPrestamos.prestarEjemplar(idUsuario, idLibro, numEjemplar);
+    }
+    
+    public boolean devolverEjemplar(Integer idLibro, Integer numEjemplar) {
+        return daoPrestamos.devolverEjemplar(idLibro, numEjemplar);
+    }
+    
+    public java.util.List<Usuario> buscarUsuariosPrestamo(String id, String nombre) {
+        return daoPrestamos.buscarUsuariosPrestamo(id, nombre);
+    }
+    
+    public boolean ejemplarPrestado(Integer idLibro, Integer numEjemplar) {
+        return daoPrestamos.ejemplarPrestado(idLibro, numEjemplar);
+    }
+    
+    public java.util.Map<String, Object> obtenerInfoPrestamo(Integer idLibro, Integer numEjemplar) {
+        return daoPrestamos.obtenerInfoPrestamo(idLibro, numEjemplar);
+    }
+    
+    public boolean ejemplarTienePrestamos(Integer idLibro, Integer numEjemplar) {
+        return daoPrestamos.ejemplarTienePrestamos(idLibro, numEjemplar);
     }
 
 }

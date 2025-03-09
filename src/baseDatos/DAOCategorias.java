@@ -101,7 +101,7 @@ public class DAOCategorias extends AbstractDAO {
         try {
             // Verificar si la categoría está siendo usada por algún libro
             PreparedStatement stmVerificar = con.prepareStatement(
-                    "SELECT COUNT(*) as total FROM libro_categoria WHERE categoria = ?");
+                    "SELECT COUNT(*) as total FROM cat_tiene_libro WHERE categoria = ?");
             stmVerificar.setString(1, nombreCategoria);
             ResultSet rs = stmVerificar.executeQuery();
             
