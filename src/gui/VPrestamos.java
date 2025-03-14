@@ -5,6 +5,7 @@
 package gui;
 
 import aplicacion.Usuario;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -190,7 +191,10 @@ public class VPrestamos extends javax.swing.JDialog {
             }
             
             if (fa.prestarEjemplar(usuario.getIdUsuario(), idLibro, numEjemplar)) {
-                fa.muestraExcepcion("Préstamo realizado con éxito.");
+                JOptionPane.showMessageDialog(this, 
+                        "Libro prestado correctamente", 
+                        "Éxito", 
+                        JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
         }

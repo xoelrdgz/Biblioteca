@@ -13,6 +13,7 @@ package gui;
 
 import aplicacion.Libro;
 import aplicacion.Ejemplar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -742,7 +743,10 @@ public class VLibro extends javax.swing.JDialog {
             
             // Realizar la devolución
             if (fa.devolverEjemplar(idLibro, ejemplar.getNumEjemplar())) {
-                fa.muestraExcepcion("Ejemplar devuelto con éxito.");
+                JOptionPane.showMessageDialog(this, 
+                        "Libro devuelto correctamente", 
+                        "Éxito", 
+                        JOptionPane.INFORMATION_MESSAGE);
                 
                 // Actualizar la tabla de ejemplares después de la devolución
                 if (idLibro != null) {

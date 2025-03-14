@@ -300,7 +300,7 @@ public class VUsuarios extends javax.swing.JDialog {
         jTextPane6.setText(""); // Nombre
         jTextPane5.setText(""); // Email
         jTextPane8.setText(""); // Dirección
-        jTextPane4.setText("Normal"); // Tipo por defecto
+        jTextPane4.setText(""); // Tipo por defecto
         
         // Salir del modo edición
         modoEdicion = false;
@@ -365,6 +365,9 @@ public class VUsuarios extends javax.swing.JDialog {
                 
                 // Actualizar estado de botones
                 actualizarEstadoBotones();
+                
+                //Limpiar formulario
+                jButton2ActionPerformed(evt);
             } else {
                 JOptionPane.showMessageDialog(this, 
                         "Error al actualizar el usuario", 
