@@ -5,10 +5,14 @@
 
 package baseDatos;
 
-import aplicacion.Ejemplar;
 import aplicacion.Categoria;
+import aplicacion.Ejemplar;
 import aplicacion.Libro;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author basesdatos

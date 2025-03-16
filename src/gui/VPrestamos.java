@@ -5,7 +5,8 @@
 package gui;
 
 import aplicacion.Usuario;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 /**

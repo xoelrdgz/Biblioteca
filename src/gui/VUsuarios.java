@@ -6,10 +6,11 @@ package gui;
 
 import aplicacion.TipoUsuario;
 import aplicacion.Usuario;
-import java.util.List;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.util.List;
 
 /**
  *
@@ -437,9 +438,6 @@ public class VUsuarios extends javax.swing.JDialog {
                         // Actualizar tabla de usuarios
                         buscarUsuarios();
                     }
-                    // No necesitamos mostrar un mensaje de error aquí porque
-                    // el método borrarUsuario en GestionUsuarios ya muestra un mensaje
-                    // si hay un problema con la eliminación
                 }
             }
         } else {

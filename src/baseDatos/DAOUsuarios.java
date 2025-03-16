@@ -4,9 +4,14 @@
  */
 
 package baseDatos;
-import aplicacion.Usuario;
+
 import aplicacion.TipoUsuario;
-import java.sql.*;
+import aplicacion.Usuario;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 /**
  *

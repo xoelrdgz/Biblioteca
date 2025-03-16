@@ -56,9 +56,9 @@ public class Prestamo {
         
         long DIAS_PRESTAMO = 30;
         Date today = new Date();
-        long diffInMillies = today.getTime() - fechaPrestamo.getTime();
-        long diffInDays = diffInMillies / (1000 * 60 * 60 * 24);
+        long difEnMilisegundos = today.getTime() - fechaPrestamo.getTime();
+        long difEnDias = difEnMilisegundos / (1000 * 60 * 60 * 24);
         
-        return diffInDays > DIAS_PRESTAMO;
+        return difEnDias > DIAS_PRESTAMO;
     }
 }

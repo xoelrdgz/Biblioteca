@@ -5,15 +5,14 @@
 
 package baseDatos;
 
-import aplicacion.Ejemplar;
-import aplicacion.Usuario;
 import aplicacion.Categoria;
+import aplicacion.Ejemplar;
 import aplicacion.Libro;
+import aplicacion.Usuario;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Properties;
 
 /**

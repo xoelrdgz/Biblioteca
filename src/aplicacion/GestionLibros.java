@@ -4,17 +4,18 @@
  */
 
 package aplicacion;
-import gui.FachadaGui;
+
 import baseDatos.FachadaBaseDatos;
+import gui.FachadaGui;
 /**
  *
  * @author basesdatos
  */
-public class GesionLibros{
+public class GestionLibros {
     FachadaGui fgui;
     FachadaBaseDatos fbd;
     
-    public GesionLibros(FachadaGui fgui, FachadaBaseDatos fbd){
+    public GestionLibros(FachadaGui fgui, FachadaBaseDatos fbd){
      this.fgui=fgui;
      this.fbd=fbd;
     }

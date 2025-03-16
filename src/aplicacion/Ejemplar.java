@@ -5,8 +5,6 @@
 
 package aplicacion;
 
-import aplicacion.Libro;
-
 /**
  *
  * @author basesdatos

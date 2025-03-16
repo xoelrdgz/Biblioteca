@@ -4,9 +4,8 @@
  */
 package aplicacion;
 
-import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
-import java.util.ArrayList;
+import gui.FachadaGui;
 
 /**
  *

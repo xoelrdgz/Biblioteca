@@ -4,8 +4,10 @@
  */
 
 package gui;
+
 import aplicacion.Libro;
-import javax.swing.table.*;
+
+import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author basesdatos

@@ -11,9 +11,10 @@
 
 package gui;
 
-import aplicacion.Libro;
 import aplicacion.Ejemplar;
-import javax.swing.JOptionPane;
+import aplicacion.Libro;
+
+import javax.swing.*;
 
 /**
  *

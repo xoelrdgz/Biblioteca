@@ -5,8 +5,9 @@
 package gui;
 
 import aplicacion.Usuario;
-import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 /**
  *

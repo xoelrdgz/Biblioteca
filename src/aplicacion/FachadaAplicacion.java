@@ -13,7 +13,7 @@ package aplicacion;
 public class FachadaAplicacion {
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
-    GesionLibros cl;
+    GestionLibros cl;
     GestionUsuarios cu;
     GestionCategorias cc;
     GestionPrestamos cp;
@@ -22,7 +22,7 @@ public class FachadaAplicacion {
  public FachadaAplicacion(){
    fgui=new gui.FachadaGui(this);
    fbd= new baseDatos.FachadaBaseDatos(this);
-   cl= new GesionLibros(fgui, fbd);
+   cl= new GestionLibros(fgui, fbd);
    cu= new GestionUsuarios(fgui, fbd);
    cc= new GestionCategorias(fgui, fbd);
    cp= new GestionPrestamos(fgui, fbd);

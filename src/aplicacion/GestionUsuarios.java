@@ -4,8 +4,10 @@
  */
 
 package aplicacion;
-import gui.FachadaGui;
+
 import baseDatos.FachadaBaseDatos;
+import gui.FachadaGui;
+
 import java.util.regex.Pattern;
 /**
  *

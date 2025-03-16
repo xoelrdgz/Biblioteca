@@ -1,48 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ab447376-1565-4387-a3b5-37d7c0fe846f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/baseDatos.properties" beforeDir="false" afterPath="$PROJECT_DIR$/baseDatos.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.mf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aplicacion/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/Categoria.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aplicacion/Ejemplar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/Ejemplar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aplicacion/FachadaAplicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/FachadaAplicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aplicacion/GesionLibros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/GesionLibros.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/aplicacion/GesionLibros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/GestionLibros.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aplicacion/GestionCategorias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/GestionCategorias.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aplicacion/GestionPrestamos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/GestionPrestamos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aplicacion/GestionUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/GestionUsuarios.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aplicacion/Libro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/Libro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aplicacion/Prestamo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/Prestamo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aplicacion/TipoUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/TipoUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aplicacion/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aplicacion/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseDatos/AbstractDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseDatos/AbstractDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseDatos/DAOCategorias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseDatos/DAOCategorias.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseDatos/DAOLibros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseDatos/DAOLibros.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseDatos/DAOPrestamos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseDatos/DAOPrestamos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseDatos/DAOUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseDatos/DAOUsuarios.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseDatos/FachadaBaseDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseDatos/FachadaBaseDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/FachadaGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/FachadaGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/ModeloListaStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/ModeloListaStrings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/ModeloTablaEjemplares.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/ModeloTablaEjemplares.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/ModeloTablaLibros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/ModeloTablaLibros.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/ModeloTablaUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/ModeloTablaUsuarios.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VAutentificacion.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VAutentificacion.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VAutentificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VAutentificacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VAviso.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VAviso.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VAviso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VAviso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VCategorias.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VCategorias.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/VCategorias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VCategorias.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/VLibro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VLibro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VPrestamos.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VPrestamos.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/VPrestamos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VPrestamos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VPrincipal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VPrincipal.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/VUsuarios.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VUsuarios.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/VUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/VUsuarios.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,21 +35,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "xoelrdgz"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;xoelrdgz&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://xoelrdgz@github.com/xoelrdgz/Biblioteca",
-    "accountId": "194d9acf-04ae-4334-8bdd-0e29714e3c64"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://xoelrdgz@github.com/xoelrdgz/Biblioteca&quot;,
+    &quot;accountId&quot;: &quot;194d9acf-04ae-4334-8bdd-0e29714e3c64&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2uJZcxcgEAc7dkriAzhpk6MfiRi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -80,6 +62,10 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "/home/xoel/NetBeansProjects/Biblioteca",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -100,6 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741968721255</updated>
       <workItem from="1741968722581" duration="57000" />
+      <workItem from="1741970707211" duration="350000" />
     </task>
     <servers />
   </component>
